@@ -1,0 +1,42 @@
+﻿# Supermarket Kata (JJAYNC)
+
+
+
+## Questions for the Client
+
+
+
+- Is currency important? No our stores only exist in England. We have no plans to join the EU. Brexit FTW!
+
+- How frequently does unit pricing change? Quarterly.
+
+- How about the special price? Weekly.
+
+- Does price change during the day? Nope. After hours.
+
+- Is there a max quantity? Yes - we only have so many raddishes, but don't worry about, we've hired BBV to build the inventory management software.
+
+- What is the output? The total price of all scanned items.
+
+- Can I unscan something? Yes
+
+- Can I scan multiple items at once? No, the cashier only has two hands.
+
+- Can I scan unidentified items? No, assume that all items have a SKU.
+
+- What's the tax rate? Yeah Brexit, it's 0% tax.
+
+
+
+
+## Features
+
+
+
+- Lookup the SKU - interface with BBV. DONE
+
+- Special Price. IN PROGRESS
+
+- Update the unit prices.
+
+- Calculate total.

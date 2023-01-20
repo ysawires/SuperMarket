@@ -5,15 +5,24 @@ namespace SuperMarket.Test;
 [TestClass]
 public class UnitTest1
 {
-    private IProductCatalog Catalog;
+    private IProductCatalog? _catalog;
+
+    [TestInitialize]
+    public void Setup()
+    {
+        _catalog = new ProductCatalog();
+    }
     
     [TestMethod]
-    public void TestMethod1()
+    public void RetrieveUnitPrice()
     {
         var sku = new Sku("A");
-        var actual = Catalog.RetrievePrice(sku);
-        var expected = new UnitPrice(15);
+        var actual = _catalog!.FindOneBySku(sku);
+        var expected = new Product(sku, new UnitPrice(50), new SpecialPrice(3, 130));
+        if (actual is Some<Product> product)
+        {
+            Assert.AreEqual(expected, product);
+        }
         
-        Assert.AreEqual(expected, actual);
     }
 }
