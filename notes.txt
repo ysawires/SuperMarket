@@ -35,8 +35,8 @@
 
 - Lookup the SKU - interface with BBV. DONE
 
-- Special Price. IN PROGRESS
+- Special Price. DONE
 
-- Update the unit prices.
+- Update the unit prices. 
 
-- Calculate total.
+- Calculate total. DONE

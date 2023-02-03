@@ -1,4 +1,6 @@
-﻿namespace SuperMarket;
+﻿using System.Linq;
+
+namespace SuperMarket;
 
 public interface IProductCatalog
 {
@@ -29,8 +31,13 @@ public class ProductCatalog : IProductCatalog
 
 public record Sku(string Identifier);
 
-public record UnitPrice(uint Value);
+public record UnitPrice(uint Value)
+{
+    public static explicit operator int(UnitPrice unitPrice) => (int)unitPrice.Value;
+};
+
 public record SpecialPrice(uint Quantity, uint Value);
+
 public record Product(Sku Sku, UnitPrice UnitPrice, SpecialPrice? SpecialPrice);
 
 public interface IResult
@@ -44,8 +51,48 @@ public record Some<T>(T Value) : IMaybe
 {
     public static implicit operator T(Some<T> some) => some.Value;
 };
+
 public record None() : IMaybe;
+
 public interface IMaybe
 {
-    public static IMaybe Of<T>(T? value) => value is null ? (IMaybe) new None() : (IMaybe) new Some<T>(value);
+    public static IMaybe Of<T>(T? value) => value is null ? (IMaybe)new None() : (IMaybe)new Some<T>(value);
+}
+
+public record ShoppingCart(IReadOnlyCollection<Product> Products)
+{
+    private ShoppingCart AddToCart(Product product)
+    {
+        return new ShoppingCart(Products.Append(product).ToList());
+    }
+
+    private ShoppingCart RemoveFromCart(Product product)
+    {
+        return new ShoppingCart(
+            Products.TakeWhile(item => item != product)
+                .Concat(Products.SkipWhile(item => item != product)
+                    .Skip(1)
+                ).ToList()
+        );
+    }
+
+    public static ShoppingCart operator +(ShoppingCart cart, Product product) => cart.AddToCart(product);
+    public static ShoppingCart operator -(ShoppingCart cart, Product product) => cart.RemoveFromCart(product);
+
+    public int Total => Products.GroupBy(product => product)
+        .Select(products => new { Product = products.Key, Count = products.Count() })
+        .Select(args => CalculateTotalForProduct(args.Product, args.Count))
+        .Sum();
+
+    private static int CalculateTotalForProduct(Product product, int count)
+    {
+        if (product.SpecialPrice is null)
+        {
+            return (int)product.UnitPrice * count;
+        }
+
+        var specialQuantity = count / (int)product.SpecialPrice.Quantity;
+        var regularQuantity = count % (int)product.SpecialPrice.Quantity;
+        return (int)product.UnitPrice * regularQuantity + (int)product.SpecialPrice.Value * specialQuantity;
+    }
 }
