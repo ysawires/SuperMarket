@@ -14,7 +14,9 @@
         <ItemsControl ItemsSource="{Binding Path=products}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Click="Button_Click" Foreground="blue" Tag="{Binding Path=Sku}">Add</Button>
+
                         <TextBlock Text="{Binding Path=Sku.Identifier}">
 
                         </TextBlock>
@@ -30,6 +32,32 @@
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
+            
+        </ItemsControl>
+        
+        <ItemsControl ItemsSource="{Binding Path=shoppingCart.Products}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        
+                        <TextBlock Text="{Binding Path=Sku.Identifier}">
+
+                        </TextBlock>
+                        <TextBlock Text="{Binding Path=UnitPrice.Value}">
+
+                        </TextBlock>
+                        <TextBlock Text="{Binding Path=SpecialPrice.Quantity}">
+
+                        </TextBlock>
+                        <TextBlock Text="{Binding Path=SpecialPrice.Value}">
+
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+
+
+            </ItemsControl.ItemTemplate>
+            
         </ItemsControl>
     </StackPanel>
 </Window>
