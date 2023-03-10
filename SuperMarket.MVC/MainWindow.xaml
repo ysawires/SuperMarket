@@ -8,32 +8,8 @@
         Title="MainWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <StackPanel>
-        <TextBlock Text="{Binding Path=count}">
-
-        </TextBlock>
-        <ItemsControl ItemsSource="{Binding Path=products}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Click="Button_Click" Foreground="blue" Tag="{Binding Path=Sku}">Add</Button>
-
-                        <TextBlock Text="{Binding Path=Sku.Identifier}">
-
-                        </TextBlock>
-                        <TextBlock Text="{Binding Path=UnitPrice.Value}">
-
-                        </TextBlock>
-                        <TextBlock Text="{Binding Path=SpecialPrice.Quantity}">
-
-                        </TextBlock>
-                        <TextBlock Text="{Binding Path=SpecialPrice.Value}">
-
-                        </TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            
-        </ItemsControl>
+        <TextBlock Text="{Binding Path=count}"/>
+        <local:ProductCatalogUI Products="{Binding products}"/>
         
         <ItemsControl ItemsSource="{Binding Path=shoppingCart.Products}">
             <ItemsControl.ItemTemplate>
