@@ -4,36 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SuperMarket.MVC"
+        FontSize="32"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
-    <StackPanel>
-        <TextBlock Text="{Binding Path=count}"/>
-        <local:ProductCatalogUI Products="{Binding products}"/>
-        
-        <ItemsControl ItemsSource="{Binding Path=shoppingCart.Products}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        
-                        <TextBlock Text="{Binding Path=Sku.Identifier}">
-
-                        </TextBlock>
-                        <TextBlock Text="{Binding Path=UnitPrice.Value}">
-
-                        </TextBlock>
-                        <TextBlock Text="{Binding Path=SpecialPrice.Quantity}">
-
-                        </TextBlock>
-                        <TextBlock Text="{Binding Path=SpecialPrice.Value}">
-
-                        </TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-
-
-            </ItemsControl.ItemTemplate>
-            
-        </ItemsControl>
+    <StackPanel
+        DataContext="{Binding RelativeSource={RelativeSource AncestorType=local:MainWindow}, Path=Grocery}"
+        >
+        <TextBlock Text="{Binding Path=ShoppingCart.Total}" />
+        <TextBlock Text="{Binding Path=Count}"/>
+        <ItemsControl ItemsSource="{Binding Products}"
+                      ButtonBase.Click="Button_Click" />
+        <ItemsControl ItemsSource="{Binding Path=ShoppingCart.Products}"
+                      ItemTemplate="{StaticResource ReadonlyTemplate}" />
     </StackPanel>
 </Window>

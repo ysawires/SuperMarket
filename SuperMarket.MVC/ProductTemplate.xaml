@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:superMarket="clr-namespace:SuperMarket;assembly=SuperMarket">
+    <DataTemplate x:Key="ReadonlyTemplate" DataType="{x:Type superMarket:Product}">
+        <StackPanel Orientation="Horizontal">
+
+            <TextBlock Text="{Binding Path=Sku.Identifier}">
+
+            </TextBlock>
+            <TextBlock Text="{Binding Path=UnitPrice.Value}">
+
+            </TextBlock>
+            <TextBlock Text="{Binding Path=SpecialPrice.Quantity}">
+
+            </TextBlock>
+            <TextBlock Text="{Binding Path=SpecialPrice.Value}">
+
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type superMarket:Product}">
+        <StackPanel Orientation="Horizontal">
+            <Button Foreground="blue" Tag="{Binding Path=Sku}">Add</Button>
+            <TextBlock Text="{Binding Path=Sku.Identifier}">
+
+            </TextBlock>
+            <TextBlock Text="{Binding Path=UnitPrice.Value}">
+
+            </TextBlock>
+            <TextBlock Text="{Binding Path=SpecialPrice.Quantity}">
+
+            </TextBlock>
+            <TextBlock Text="{Binding Path=SpecialPrice.Value}">
+
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>
