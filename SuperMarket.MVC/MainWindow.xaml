@@ -8,14 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
-    <StackPanel
-        DataContext="{Binding RelativeSource={RelativeSource AncestorType=local:MainWindow}, Path=Grocery}"
-        >
-        <TextBlock Text="{Binding Path=ShoppingCart.Total}" />
-        <TextBlock Text="{Binding Path=Count}"/>
-        <ItemsControl ItemsSource="{Binding Products}"
-                      ButtonBase.Click="Button_Click" />
-        <ItemsControl ItemsSource="{Binding Path=ShoppingCart.Products}"
-                      ItemTemplate="{StaticResource ReadonlyTemplate}" />
-    </StackPanel>
+    <ContentControl
+        Content="{Binding RelativeSource={RelativeSource AncestorType=local:MainWindow}, Path=GroceryViewModel}">
+    </ContentControl>
 </Window>

@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:superMarket="clr-namespace:SuperMarket;assembly=SuperMarket">
+                    xmlns:superMarket="clr-namespace:SuperMarket;assembly=SuperMarket"
+                    xmlns:mvc="clr-namespace:SuperMarket.MVC">
     <DataTemplate x:Key="ReadonlyTemplate" DataType="{x:Type superMarket:Product}">
         <StackPanel Orientation="Horizontal">
 
@@ -19,9 +20,12 @@
         </StackPanel>
     </DataTemplate>
     
-    <DataTemplate DataType="{x:Type superMarket:Product}">
+    <DataTemplate DataType="{x:Type mvc:ProductViewModel}">
         <StackPanel Orientation="Horizontal">
-            <Button Foreground="blue" Tag="{Binding Path=Sku}">Add</Button>
+            <Button Foreground="blue" Tag="{Binding Path=Sku}"
+                    Command="{Binding AddProductToCart}"
+                    CommandParameter="{Binding Sku}"
+                    >Add</Button>
             <TextBlock Text="{Binding Path=Sku.Identifier}">
 
             </TextBlock>

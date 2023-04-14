@@ -7,6 +7,7 @@
          <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
                  <ResourceDictionary Source="ProductTemplate.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="GroceryView.xaml"></ResourceDictionary>
              </ResourceDictionary.MergedDictionaries>
          </ResourceDictionary>
     </Application.Resources>
